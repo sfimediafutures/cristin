@@ -6,9 +6,7 @@ This is useful if you want to keep track of the results that will
 appear automatically in the yearly project reporting, which of
 course uses the same API.
 
-The CRISTIN API is described here:
-
-```https://www.cristin.no/tjenester/api/```
+The CRISTIN API is described here: [https://www.cristin.no/tjenester/api/]
 
 The Python program does not have the overview of all project
 names and codes, but keeps the relation for some project names and

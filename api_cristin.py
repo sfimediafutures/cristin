@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Find project results with the CRISTIN API
+# by Koenraad De Smedt
 
 import requests
 

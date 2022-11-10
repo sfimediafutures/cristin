@@ -4,7 +4,6 @@
 # Find project results with the CRISTIN API
 
 import requests
-import matplotlib.pyplot as plt
 
 # a few project codes
 project_dict = {'MediaFutures':'309339', 'CLARINO+':'295700',
@@ -53,6 +52,7 @@ print_project_results('MediaFutures')
 #print_project_results('CLARINO+')
 
 from collections import Counter
+import matplotlib.pyplot as plt
 
 def plot_project_results (project_name, source='NFR'):
   url = find_funding_url(source, project_name)

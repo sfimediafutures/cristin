@@ -4,7 +4,7 @@ A small Python program that uses the API to CRISTIN for accessing
 results linked to certain RCN projects.
 This is useful if you want to keep track of the results that will
 appear automatically in the yearly project reporting, which of
-course uses the same API.
+course uses the same API. 
 
 The CRISTIN API is described here: [https://www.cristin.no/tjenester/api/]
 

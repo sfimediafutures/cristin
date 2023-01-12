@@ -6,38 +6,45 @@
 
 import requests
 
-# a few project codes
-project_dict = {'MediaFutures':'309339', 'CLARINO+':'295700',
-                'CLARINO':'208375', 'INESS':'195323'}
+# a few project codes at some sources, add more if needed
+project_dict = {'NFR':{'MediaFutures':'309339', 'CLARINO+':'295700',
+                       'CLARINO':'208375', 'INESS':'195323',
+                       'LIA':'225941'},
+                'SIGMA2':{'Fillagring Tekstlab':'NS9691K'}}
 
 cristin_fundings_url = 'https://api.cristin.no/v2/fundings'
 
 def find_funding_url (source, project_name):
-  project_code = project_dict[project_name]
+  project_code = project_dict[source][project_name]
   response = requests.get(cristin_fundings_url,
                           params={'funding_source':source,
                                   'project_code':project_code})
   if response.status_code == 200:
     data = response.json()
-    #print(data)
-    return data[0]['url']
+    # print(data)
+    if data != []: 
+      return data[0]['url']
   else:
     print('Not a valid request')
     
-find_funding_url('NFR', 'MediaFutures') # MediaFutures
+find_funding_url('NFR', 'MediaFutures')
+find_funding_url('NFR', 'CLARINO+')
+find_funding_url('SIGMA2', 'Fillagring Tekstlab')
+
 # https://api.cristin.no/v2/fundings?funding_source=NFR&project_code=309339
 
 def print_project_results (project_name, source='NFR'):
   url = find_funding_url(source, project_name)
-  response = requests.get(url+'/results') #, verify=False
-  if response.status_code == 200:
-    data = response.json()
-    #print(data)
-    for result in data:
-      print_project_result(result)
-    #return data
-  else:
-    print('Not a valid request')
+  if url:
+    response = requests.get(url+'/results') #, verify=False
+    if response.status_code == 200:
+      data = response.json()
+      #print(data)
+      for result in data:
+        print_project_result(result)
+        #return data
+    else:
+      print('Not a valid request')
 
 def print_project_result (result):
   for t in result['title']:
@@ -50,7 +57,8 @@ def print_project_result (result):
     print('      et al.')
 
 print_project_results('MediaFutures')
-#print_project_results('CLARINO+')
+print_project_results('CLARINO+')
+print_project_results('Fillagring Tekstlab', 'SIGMA2')
 
 from collections import Counter
 import matplotlib.pyplot as plt
@@ -76,4 +84,5 @@ def plot_project_results (project_name, source='NFR'):
 # Note that project results already seem to be sorted
 
 plot_project_results('MediaFutures')
-#plot_project_results('CLARINO+')
+plot_project_results('CLARINO+')
+plot_project_results('Fillagring Tekstlab', 'SIGMA2')

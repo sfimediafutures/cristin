@@ -1,7 +1,9 @@
 # cristin
 
+by Koenraad De Smedt, University of Bergen
+
 A small Python program that uses the API to CRISTIN for accessing
-results linked to certain RCN projects.
+results linked to projects.
 This is useful if you want to keep track of the results that will
 appear automatically in the yearly project reporting, which of
 course uses the same API. 

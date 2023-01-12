@@ -5,7 +5,7 @@ by Koenraad De Smedt, University of Bergen
 A small Python program that uses the API to CRISTIN for accessing
 results linked to projects.
 This is useful if you want to keep track of the results that will
-appear automatically in the yearly project reporting, which of
+appear automatically in the yearly project reporting, for which RCN of
 course uses the same API. 
 
 The CRISTIN API is described here: [https://www.cristin.no/tjenester/api/]

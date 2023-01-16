@@ -10,7 +10,7 @@ import requests
 project_dict = {'NFR':{'MediaFutures':'309339', 'CLARINO+':'295700',
                        'CLARINO':'208375', 'INESS':'195323',
                        'LIA':'225941'},
-                'SIGMA2':{'Fillagring Tekstlab':'NS9691K'}}
+                'SIGMA2':{'Fillagring':'NS9691K'}}
 
 cristin_fundings_url = 'https://api.cristin.no/v2/fundings'
 
@@ -29,7 +29,7 @@ def find_funding_url (source, project_name):
     
 find_funding_url('NFR', 'MediaFutures')
 find_funding_url('NFR', 'CLARINO+')
-find_funding_url('SIGMA2', 'Fillagring Tekstlab')
+find_funding_url('SIGMA2', 'Fillagring')
 
 # https://api.cristin.no/v2/fundings?funding_source=NFR&project_code=309339
 
@@ -78,31 +78,32 @@ def print_contributors (contributors, count):
 
 print_project_results('MediaFutures')
 print_project_results('CLARINO+')
-print_project_results('Fillagring Tekstlab', 'SIGMA2')
+print_project_results('Fillagring', 'SIGMA2')
 
 from collections import Counter
 import matplotlib.pyplot as plt
 
 def plot_project_results (project_name, source='NFR'):
   url = find_funding_url(source, project_name)
-  response = requests.get(url+'/results')
-  if response.status_code == 200:
-    data = response.json()
-    #print(data)
-    years = Counter([result['year_published'] for result in data])
-    plt.figure(dpi=120)
-    plt.bar(years.keys(),[years[i] for i in years])
-    #plt.yscale('log')
-    plt.title('Project results '+project_name)
-    plt.ylabel('Number of results')
-    plt.xlabel('Years')
-    plt.show()
-    return years
-  else:
-    print('Not a valid request')
+  if url:
+    response = requests.get(url+'/results')
+    if response.status_code == 200:
+      data = response.json()
+      #print(data)
+      years = Counter([result['year_published'] for result in data])
+      plt.figure(dpi=120)
+      plt.bar(years.keys(),[years[i] for i in years])
+      #plt.yscale('log')
+      plt.title('Project results '+project_name)
+      plt.ylabel('Number of results')
+      plt.xlabel('Years')
+      plt.show()
+      return years
+    else:
+      print('Not a valid request')
 
 # Note that project results already seem to be sorted
 
 plot_project_results('MediaFutures')
 plot_project_results('CLARINO+')
-plot_project_results('Fillagring Tekstlab', 'SIGMA2')
+plot_project_results('Fillagring', 'SIGMA2')

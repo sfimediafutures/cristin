@@ -42,7 +42,7 @@ def print_project_results (project_name, source='NFR'):
       #print(data)
       for result in data:
         print_project_result(result)
-        #return data
+      return len(data)
     else:
       print('Not a valid request')
 
@@ -77,7 +77,7 @@ def plot_project_results (project_name, source='NFR'):
     plt.ylabel('Number of results')
     plt.xlabel('Years')
     plt.show()
-    #return data
+    return years
   else:
     print('Not a valid request')
 

@@ -49,7 +49,27 @@ def print_project_results (project_name, source='NFR'):
 def print_project_result (result):
   for t in result['title']:
     print(result['title'][t])
-  print(f"   ({result['category']['name']['en']} {result['year_published']})")
+  print(f"   ({result['year_published']}) -- {result['category']['name']['en']}")
+  print_contributors(result['contributors']['preview'],
+                     result['contributors']['count'])
+
+# this version prints authors on one line
+def print_contributors (contributors, count):
+  nameslist = [c['first_name'] + ' ' + c['surname'] for c in contributors]
+  namestring = '   ' + ', '.join(nameslist)
+  if count > len(contributors):
+    namestring = namestring + ', et al.'
+  print(namestring)
+
+# this version prints contributors on separate lines
+def print_contributors (contributors, count):
+  for contributor in contributors:
+    print('  ', contributor['first_name'], contributor['surname'])
+  if count > len(contributors):
+    print('      et al.')
+  for t in result['title']:
+    print(result['title'][t])
+  print(f"   ({result['year_published']}) -- {result['category']['name']['en']}")
   #print(result['contributors'])
   for contributor in result['contributors']['preview']:
     print('  ', contributor['first_name'], contributor['surname'])

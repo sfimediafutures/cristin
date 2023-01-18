@@ -67,14 +67,6 @@ def print_contributors (contributors, count):
     print('  ', contributor['first_name'], contributor['surname'])
   if count > len(contributors):
     print('      et al.')
-  for t in result['title']:
-    print(result['title'][t])
-  print(f"   ({result['year_published']}) -- {result['category']['name']['en']}")
-  #print(result['contributors'])
-  for contributor in result['contributors']['preview']:
-    print('  ', contributor['first_name'], contributor['surname'])
-  if result['contributors']['count'] > len(result['contributors']['preview']):
-    print('      et al.')
 
 print_project_results('MediaFutures')
 print_project_results('CLARINO+')

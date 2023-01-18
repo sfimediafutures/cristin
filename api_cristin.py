@@ -94,7 +94,7 @@ def plot_project_results (project_name, source='NFR'):
     else:
       print('Not a valid request')
 
-# Note that project results already seem to be sorted
+# Project resultsseem to be sorted already
 
 plot_project_results('MediaFutures')
 plot_project_results('CLARINO+')

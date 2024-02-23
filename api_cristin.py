@@ -33,16 +33,19 @@ find_funding_url('SIGMA2', 'Fillagring')
 
 # https://api.cristin.no/v2/fundings?funding_source=NFR&project_code=309339
 
-def print_project_results (project_name, source='NFR'):
+def print_project_results (project_name, source='NFR', year=None):
   url = find_funding_url(source, project_name)
   if url:
     response = requests.get(url+'/results') #, verify=False
     if response.status_code == 200:
       data = response.json()
       #print(data)
+      count = 0
       for result in data:
-        print_project_result(result)
-      return len(data)
+        if not year or result['year_published'] == str(year):
+          print_project_result(result)
+          count = count + 1
+      return count, len(data)
     else:
       print('Not a valid request')
 
@@ -70,6 +73,7 @@ def print_contributors (contributors, count):
 
 print_project_results('MediaFutures')
 print_project_results('CLARINO+')
+print_project_results('CLARINO+', year=2023)
 print_project_results('Fillagring', 'SIGMA2')
 
 from collections import Counter
@@ -94,7 +98,7 @@ def plot_project_results (project_name, source='NFR'):
     else:
       print('Not a valid request')
 
-# Project resultsseem to be sorted already
+# Project results seem to be mostly sorted already
 
 plot_project_results('MediaFutures')
 plot_project_results('CLARINO+')
